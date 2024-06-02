@@ -1,0 +1,70 @@
+﻿Feladat és tervezet
+
+Feladat----------------------------------------------
+
+~~~ A panziónak 6 szobája van, ennek jellemzői: szobaszám (1-6), férőhelyek száma (2,3,4), aktuális ár egy főre egy éjszakára (6000-12000 Ft) Ezek adatait is karban kell tartani.
+
+
+~~~ Egy regisztrációt (ügyfelek felvitelét) megvalósító felület (ügyfél azonosítója, neve, születési dátuma, e-mail címe, VIP ügyfél-e) Az azonosító az ügyfél neve + a regisztrációjának időpontja.
+	A VIP ügyfél 3% kedvezményre jogosult az árból és hírlevelet kap negyedévente.
+
+
+~~~ A szobafoglalást kezelő felület: melyik szobát, melyik ügyfél, érkezés és távozás dátuma, hány főre, mennyit fizet érte, a foglalás állapota (előjegyzett, teljesült, lemondott)
+
+
+~~~ Statisztikák. A tulajdonos számára fontos információk: összes bevétel tól - ig, legtöbbet kiadott szoba, visszajáró vendégek listája fizetett összeg szerint csökkenő sorrendben.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TERV~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Folyamatban----------------
+-- Adatbázis megtervezése és létrehozása
+-- Biztonságos adatbevitel
+
+Prio-----------------------
+
+
+
+Ráér-----------------------
+
+-- Adatokat DataGrid-ben megmutatni és változtatáshoz bindongolt szovegdobozokat létrehozni
+-- Új adatok felvitele felület -- ??végeztével automatikus navigálás??
+
+-- Kódolni a database jelszót legalább???
+-- Finomítani a szobafoglaláson
+
+Kész----------------------
+-- Bejelentkezéssel kezdeni
+-- Menu, és főoldal jelenjen meg amikor megnyitjuk az alkalmazást
+-- Kell egy "Szoba" és egy "Ugyfel" class
+-- Kell egy "Foglalt" class
+-- Adatok tárolása DataBase-el
+-- Oldalakat (Paget) adni hozzá, és azokkal navigálni
+
+ public void LoadFromDatabase(string connStr)
+        {
+            telepulesek.Clear();
+            MySqlConnection connection = new MySqlConnection(connStr);
+            connection.Open();
+            string sqlCode = "SELECT * FROM telepulesek";
+            MySqlCommand mySqlcmd = new MySqlCommand(sqlCode, connection);
+            MySqlDataReader rdr = mySqlcmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                telepulesek.Add(new Telepules(rdr[0].ToString(), (int)rdr[1]));
+            }
+            rdr.Close();
+            connection.Close();
+        }
+
+        public void InsertToDatabase(string connStr, Telepules ujTelepules)
+        {
+            MySqlConnection conn = new MySqlConnection(connStr);
+            conn.Open();
+            string sql = @$"INSERT INTO telepulesek(nev, lelekszam) VALUES('{ujTelepules.Nev}','{ujTelepules.Lelekszam}')";
+            MySqlCommand mySqlCommand = new MySqlCommand(sql, conn);
+            mySqlCommand.ExecuteNonQuery();
+            conn.Close();
+            LoadFromDatabase(connStr);
+        }
+
+        LoadFromDatabase(@$"server=localhost;user={tbNev.Text};password={tbJelszo.Text};database=varosok")

@@ -1,0 +1,79 @@
+﻿<Page x:Class="kikeletPanzio.UjSzobaFoglalasPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:kikeletPanzio"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UjSzobaFoglalasa"
+      WindowTitle="Új Szoba Foglalása">
+    <Frame x:Name="ujszobaFoglalasFrame" NavigationUIVisibility="Hidden">
+        <Frame.Content>
+            <Grid x:Name="mainGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel x:Name="spkUjFoglalasAdatok" Grid.RowSpan="2">
+                    <Label Content="Szoba száma" Style="{StaticResource UjSzobaFoglalasStackPanelLabel}"/>
+
+                    <ComboBox x:Name="cbSzobaszam" SelectedItem="{Binding Szobaszam,Mode=TwoWay}" Style="{StaticResource UjSzobaFoglalasStackPanelCombo}"/>
+
+                    <StackPanel x:Name="spUgyfelAdatok">
+                        <Label Content="Ügyfél ID:" Style="{StaticResource UjSzobaFoglalasStackPanelLabel}"/>
+                        <TextBox  PreviewKeyDown="TbUgyfelID_Keres_TextInput" Style="{StaticResource UjSzobaFoglalasStackPanelTextBox}"/>
+                        <ComboBox x:Name="cbUgyfelID" Style="{StaticResource UjSzobaFoglalasStackPanelCombo}"
+                                  SelectedItem="{Binding UgyfelAzon, Mode=TwoWay}"/>
+                    </StackPanel>
+
+                    <Label Content="Fő:" Style="{StaticResource UjSzobaFoglalasStackPanelLabel}"/>
+                    <TextBox x:Name="tbFo" PreviewTextInput="tbFo_PreviewTextInput" Text="{Binding Letszam, Mode=OneWayToSource}" Style="{StaticResource UjSzobaFoglalasStackPanelTextBox}"/>
+
+                    <Label Content="Ár (forintban):" Style="{StaticResource UjSzobaFoglalasStackPanelLabel}"/>
+                    <TextBox x:Name="tbFizetendo" IsEnabled="False" Style="{StaticResource UjSzobaFoglalasStackPanelTextBox}"/>
+
+                    <StackPanel>
+                        <Label Content="Foglalás kezdete" Style="{StaticResource UjSzobaFoglalasStackPanelLabel}"/>
+                        <DatePicker x:Name="a" SelectedDate="{Binding FoglalasKezdetDate, Mode=TwoWay}" Style="{StaticResource UjSzobaFoglalasStackPanelDate}"/>
+
+                        <Label Content="Foglalás vége" Style="{StaticResource UjSzobaFoglalasStackPanelLabel}"/>
+                        <DatePicker x:Name="dpVeg" SelectedDate="{Binding FoglalasVegeDate, Mode=TwoWay}" Style="{StaticResource UjSzobaFoglalasStackPanelDate}"/>
+                    </StackPanel>
+                    
+                </StackPanel>
+                
+                <DataGrid x:Name="dgSzobak" Grid.Column="1" AutoGenerateColumns="False" SelectionChanged="dgSzobak_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Szobaszám" Binding="{Binding Szobaszam}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Férőhely" Binding="{Binding Ferohely}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Ár" Binding="{Binding Ar}" IsReadOnly="True" />
+                        <!--<DataGridCheckBoxColumn Header="Foglalt" Binding="{Binding Foglalt}" IsReadOnly="True" /> KELL??-->
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <DataGrid x:Name="dgFoglaltDate" Grid.Column="1" Grid.Row="1" AutoGenerateColumns="False" SelectionChanged="dgSzobak_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Szobaszám" Binding="{Binding Szobaszam}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Ügyfél azonosító:" Binding="{Binding UgyfelAzon}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Foglalás kezdete:" Binding="{Binding FoglalasKezdetDate, StringFormat='yyyy-MM-dd'}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Foglalás vége:" Binding="{Binding FoglalasVegeDate, StringFormat='yyyy-MM-dd'}" IsReadOnly="True" />                        
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="2" Content="Rögzítés" Click="AdatokRogzitese_click"
+                        Style="{StaticResource UjSzobaFoglalasStackPanelButton}"/>
+                
+                <Button Grid.Row="2" Grid.Column="1" Content="Menü" Click="Vissza_A_Menube"
+                        Style="{StaticResource UjSzobaFoglalasStackPanelButton}"/>
+            </Grid>
+        </Frame.Content>
+    </Frame>
+</Page>

@@ -1,0 +1,32 @@
+﻿<Window x:Class="kikeletPanzio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kikeletPanzio"
+        mc:Ignorable="d"
+        Title="Bejelentkezés" Height="500" Width="900">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/StylesDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Frame  x:Name="mainWindowFrame" NavigationUIVisibility="Hidden">
+        <Frame.Content>
+            <Border Style="{StaticResource StackPanelStyle}">
+                <StackPanel >
+                    <Label Content="A bejelentkezéshez kérem adja meg az adatait" Style="{StaticResource StackPanelLabelTitle}"/>
+                    <Label Content="Név" Style="{StaticResource StackPanelLabel}"/>
+                    <TextBox x:Name="tbNev" Style="{StaticResource StackPanelTextBox}"/>
+                    <Label Content="Jelszó" Style="{StaticResource StackPanelLabel}"/>
+                    <TextBox x:Name="tbJelszo" PreviewTextInput="tbJelszo_PreviewTextInput" Style="{StaticResource StackPanelTextBox}"/>
+                    <Button Content="Bejelentkezés" Click="Bejelentkez_Button_Click" Style="{StaticResource StackPanelButton}"/>
+                </StackPanel>
+            </Border>            
+        </Frame.Content>
+    </Frame>
+</Window>
