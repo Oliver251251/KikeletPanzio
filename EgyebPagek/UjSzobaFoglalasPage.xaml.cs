@@ -99,7 +99,7 @@ namespace kikeletPanzio
                 return;
             }
 
-            tbFizetendo.Text = ugyfelek.Where(x => x.Azon == cbUgyfelID.SelectedItem.ToString()).ToList()[0].Vip ? $"{(valasztott.Ar * int.Parse(e.Text))} Ft" : "";
+            tbFizetendo.Text = ugyfelek.Where(x => x.Azon == cbUgyfelID.SelectedItem.ToString()).ToList()[0].Vip ? $"{valasztott.Ar * int.Parse(e.Text)} Ft" : $"{valasztott.Ar * int.Parse(e.Text) * .97}";
         }
 
         private void TbUgyfelID_Keres_TextInput(object sender, KeyEventArgs e)

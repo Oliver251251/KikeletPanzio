@@ -23,6 +23,7 @@
                         <MenuItem Header="Új szoba foglalása" Click="Szobafoglalas_click" />
                         <MenuItem Header="Foglalás módosítása"/>
                     </MenuItem>
+                    <MenuItem Header="Statisztika" Click="MenuItem_Click"/>
                 </Menu>
 
                 <Label Grid.Row="1" Content="Főoldal, válassz egy menüpontot!"

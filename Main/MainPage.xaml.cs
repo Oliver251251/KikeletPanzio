@@ -1,4 +1,5 @@
-﻿using System;
+﻿using kikeletPanzio.EgyebPagek;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,11 @@ namespace kikeletPanzio
         private void UjUgyfelRegisztralas_Click(object sender, RoutedEventArgs e)
         {
             mainWindowFrame.Navigate(new UjUgyfelFelvitel(nev, jelszo));
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowFrame.Navigate(new StatisztikaPage(nev, jelszo));
         }
 
         private void Szobafoglalas_click(object sender, RoutedEventArgs e)
