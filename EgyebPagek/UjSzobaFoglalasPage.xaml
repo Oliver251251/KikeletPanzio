@@ -25,7 +25,7 @@
                 <StackPanel x:Name="spkUjFoglalasAdatok" Grid.RowSpan="2">
                     <Label Content="Szoba száma" Style="{StaticResource UjSzobaFoglalasStackPanelLabel}"/>
 
-                    <ComboBox x:Name="cbSzobaszam" SelectedItem="{Binding Szobaszam,Mode=TwoWay}" Style="{StaticResource UjSzobaFoglalasStackPanelCombo}"/>
+                    <ComboBox x:Name="cbSzobaszam" SelectionChanged="cbSzobaszam_SelectionChanged" SelectedItem="{Binding Szobaszam,Mode=TwoWay}" Style="{StaticResource UjSzobaFoglalasStackPanelCombo}"/>
 
                     <StackPanel x:Name="spUgyfelAdatok">
                         <Label Content="Ügyfél ID:" Style="{StaticResource UjSzobaFoglalasStackPanelLabel}"/>
@@ -55,7 +55,6 @@
                         <DataGridTextColumn Header="Szobaszám" Binding="{Binding Szobaszam}" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Férőhely" Binding="{Binding Ferohely}" IsReadOnly="True" />
                         <DataGridTextColumn Header="Ár" Binding="{Binding Ar}" IsReadOnly="True" />
-                        <!--<DataGridCheckBoxColumn Header="Foglalt" Binding="{Binding Foglalt}" IsReadOnly="True" /> KELL??-->
                     </DataGrid.Columns>
                 </DataGrid>
 

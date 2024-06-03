@@ -99,7 +99,7 @@ namespace kikeletPanzio
                 return;
             }
 
-            tbFizetendo.Text = $"{valasztott.Ar * int.Parse(e.Text)} Ft";
+            tbFizetendo.Text = ugyfelek.Where(x => x.Azon == cbUgyfelID.SelectedItem.ToString()).ToList()[0].Vip ? $"{(valasztott.Ar * int.Parse(e.Text))} Ft" : "";
         }
 
         private void TbUgyfelID_Keres_TextInput(object sender, KeyEventArgs e)
@@ -172,17 +172,22 @@ namespace kikeletPanzio
                 throw new Exception("A kezdési dátum nem lehet későbbi mint a befejezési!");
             }
 
-            List<Foglalt> overlappingBookings = foglaltak
+            List<Foglalt> foglaltIdopontok = foglaltak
                 .Where(x => x.Szobaszam == ujFoglal.Szobaszam &&
                             ((ujFoglal.FoglalasKezdetDate >= x.FoglalasKezdetDate && ujFoglal.FoglalasKezdetDate <= x.FoglalasVegeDate) ||
                              (ujFoglal.FoglalasVegeDate >= x.FoglalasKezdetDate && ujFoglal.FoglalasVegeDate <= x.FoglalasVegeDate)))
                 .ToList();
 
-            if (overlappingBookings.Any())
+            if (foglaltIdopontok.Any())
             {
                 throw new Exception("A szoba a megadott időintervallumban le van foglalva!");
             }
 
+        }
+
+        private void cbSzobaszam_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dgSzobak.SelectedIndex = (sender as ComboBox).SelectedIndex;
         }
 
         private void Vissza_A_Menube(object sender, RoutedEventArgs e)
