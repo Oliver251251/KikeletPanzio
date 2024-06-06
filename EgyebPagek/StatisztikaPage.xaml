@@ -38,24 +38,7 @@
 
                 </StackPanel>
 
-                <DataGrid Grid.Row="2">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Visszajáró vendégek" Binding="{Binding FoglalasKezdetDate, StringFormat='yyyy-MM-dd'}" IsReadOnly="True" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                    
-                    
-                <!--<DataGrid x:Name="dgStatisztika" Grid.Row="1">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Szobaszám" Binding="{Binding SzobafoglaltSzobak, Mode=OneWay}" IsReadOnly="True"/>
-                        --><!--<DataGridTextColumn Header="Használata" Binding="{Binding UgyfelAzon}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Visszajáró vendégek" Binding="{Binding FoglalasKezdetDate, StringFormat='yyyy-MM-dd'}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Alkalom" Binding="{Binding FoglalasKezdetDate, StringFormat='yyyy-MM-dd'}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Foglalás vége:" Binding="{Binding FoglalasVegeDate, StringFormat='yyyy-MM-dd'}" IsReadOnly="True" />--><!--
-
-                    </DataGrid.Columns>
-                </DataGrid>-->
-                    
+                <DataGrid x:Name="dgVendekeg" Grid.Row="2"/>
             </Grid>
         </Frame.Content>
     </Frame>

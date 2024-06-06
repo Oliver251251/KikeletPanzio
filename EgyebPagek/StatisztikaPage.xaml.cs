@@ -25,14 +25,11 @@ namespace kikeletPanzio.EgyebPagek
         string nev, jelszo, connString;
         List<Szoba> szobak = new List<Szoba>();
         List<Ugyfel> ugyfelek = new List<Ugyfel>();
-        List<Foglalt> foglaltak = new List<Foglalt>();
-        Statisztika statisztika = new Statisztika();
-        
+        List<Foglalt> foglaltak = new List<Foglalt>();        
 
         public StatisztikaPage(string nev, string jelszo)
         {
             InitializeComponent();
-            containerGrid.DataContext = statisztika;
             this.nev = nev;
             this.jelszo = jelszo;
             connString = @$"server=localhost;user={nev};password={jelszo};database=hotel";
@@ -53,13 +50,10 @@ namespace kikeletPanzio.EgyebPagek
                 return;
             }
 
-            statisztika.LegtobbetKiadottSzobaFunc(dpKezdet.SelectedDate.Value,dpVeg.SelectedDate.Value,foglaltak);
-            tbBevetel.Text = statisztika.OsszbevetelIntervallum(dpKezdet.SelectedDate.Value, dpVeg.SelectedDate.Value, foglaltak, szobak).ToString();
-            //tbLegtobbSzoba.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            tbLegtobbSzoba.Text = statisztika.LegtobbetKiadottSzoba.ToString();
+            tbLegtobbSzoba.Text = Statisztika.LegtobbetKiadottSzobaFunc(dpKezdet.SelectedDate.Value,dpVeg.SelectedDate.Value,connString);
+            tbBevetel.Text = Statisztika.OsszbevetelIntervallum(dpKezdet.SelectedDate.Value, dpVeg.SelectedDate.Value, connString);
+            dgVendekeg.ItemsSource = Statisztika.VisszaJaroVendegek(dpKezdet.SelectedDate.Value, dpVeg.SelectedDate.Value, connString);
         }
-
-
 
         private void VisszaMainMenu_Click(object sender, RoutedEventArgs e)
         {
